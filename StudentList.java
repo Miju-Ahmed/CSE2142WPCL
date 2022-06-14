@@ -32,8 +32,8 @@ public class StudentList {
 				System.out.println(studentName);
 				String nameSplit[] = studentName.split(",");	
 				Random random = new Random();
-				int y = random.nextInt();
-				System.out.println(i[y]);
+				int randomNumber = random.nextInt();
+				System.out.println(nameSplit[randomNumber]);
 			} 
 			catch (Exception e){
 
@@ -45,12 +45,12 @@ public class StudentList {
 			try {
 				BufferedWriter bufferedReader = new BufferedWriter(
 						new FileWriter("students.txt", true));
-				String t = args[0].substring(1);
-				Date d = new Date();
-				String df = "dd/mm/yyyy-hh:mm:ss a";
-				DateFormat dateFormat = new SimpleDateFormat(df);
-				String fd= dateFormat.format(d);
-				bufferedReader.write(", "+t+"\nList last updated on "+fd);
+				String names = args[0].substring(1);
+				Date date = new Date();
+				String dateFormate = "dd/mm/yyyy-hh:mm:ss a";
+				DateFormat dateFormat = new SimpleDateFormat(dateFormate);
+				String dateUpdate= dateFormat.format(date);
+				bufferedReader.write(", "+names+"\nList last updated on "+dateUpdate);
 				bufferedReader.close();
 			} 
 			catch (Exception e){
@@ -69,8 +69,8 @@ public class StudentList {
 				String nameSplit[] = studentName.split(",");	
 				boolean done = false;
 				String t = args[0].substring(1);
-				for(int idx = 0; idx<i.length && !done; idx++) {
-					if(i[idx].equals(t)) {
+				for(int idx = 0; idx<nameSplit.length && !done; idx++) {
+					if(nameSplit[idx].equals(t)) {
 						System.out.println("We found it!");
 						done=true;
 					}
@@ -87,11 +87,11 @@ public class StudentList {
 				BufferedReader bufferedReader = new BufferedReader(
 						new InputStreamReader(
 								new FileInputStream("students.txt"))); 
-				String D = bufferedReader.readLine();
-				char a[] = D.toCharArray();			
+				String readLine = bufferedReader.readLine();
+				char split[] = readLine.toCharArray();			
 				boolean in_word = false;
 				int count=0;
-				for(char c:a) {
+				for(char c:split) {
 					if(c ==' '){
 						if (!in_word) {	
 							count++; in_word =true;
@@ -99,12 +99,17 @@ public class StudentList {
 						else { in_word=false;}			
 					}
 				}
-				System.out.println(count +" word(s) found " + a.length);
+				System.out.println(count +" word(s) found " + split.length);
 			} 
 			catch (Exception e){
 				
 			} 
-			System.out.println("Data Loaded.");				
+			System.out.println("Data Loaded.");
+						
+		}
+		else{
+				System.out.println("Loading data ...");
+				System.out.println("The given arguments is not mathched.");
 		}
 	}
 }
